@@ -1,12 +1,16 @@
 package org.lessons.java.books;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 	
+	private static final String FILE_PATH = "C:\\Users\\admin\\Documents\\BOOLEAN\\JAVA\\progetti\\java-exceptions-books\\src\\org\\lessons\\java\\books\\books.txt";
+	
 	public static void main(String[] args) {
+		
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -64,14 +68,16 @@ public class Main {
 //			myWriter = new FileWriter("books.txt");
 //			myWriter = new FileWriter("./books.txt");
 			//percorso giusto alla stessa altezza delle calssi
-			myWriter = new FileWriter("C:\\Users\\admin\\Documents\\BOOLEAN\\JAVA\\progetti\\java-exceptions-books\\src\\org\\lessons\\java\\books\\books.txt", true);
+			myWriter = new FileWriter(FILE_PATH, true);
 			
 			//STAMPA DELL'ARRAY
+			System.err.println("LIBRI APPENA INSERITI =");
 			for (int i = 0; i < LNG; i++) {
 				
 				myWriter.write(libri[i] + "\n");
 				System.out.println("Libro " + (i + 1) + " = " + libri[i]);
 			}
+			System.out.println("\n-------------------------------------------\n");
 			
 		} catch (IOException e) {
 			
@@ -84,6 +90,30 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
+		
+		//lettura del file
+		File tmpFile = new File(FILE_PATH);
+		Scanner reader = null;
+		try {
+					
+			reader = new Scanner(tmpFile);
+			
+			System.err.println("LIBRI DAL FILE =");
+			
+			while (reader.hasNextLine()) {
+				
+				String line = reader.nextLine();
+				System.out.println(line);
+			}
+		} catch (Exception e) { 
+		
+			System.out.println("Error reading file: " + e.getMessage());
+		} finally {
+			
+			if (reader != null)
+				reader.close();
+		}
+		
 		
 		
 	}
