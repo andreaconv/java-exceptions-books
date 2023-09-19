@@ -1,5 +1,7 @@
 package org.lessons.java.books;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -54,12 +56,34 @@ public class Main {
 		
 		System.out.println("\n-----------------------------------------\n");
 		
-		for (int i = 0; i < LNG; i++) {
+		FileWriter myWriter = null;
+		try {
 			
-			System.out.println("Libro " + (i + 1) + " = " + libri[i]);
+//			myWriter = new FileWriter("filename.java.out");
+			//PROVE PERCORSO
+//			myWriter = new FileWriter("books.txt");
+//			myWriter = new FileWriter("./books.txt");
+			//percorso giusto alla stessa altezza delle calssi
+			myWriter = new FileWriter("C:\\Users\\admin\\Documents\\BOOLEAN\\JAVA\\progetti\\java-exceptions-books\\src\\org\\lessons\\java\\books\\books.txt", true);
 			
+			//STAMPA DELL'ARRAY
+			for (int i = 0; i < LNG; i++) {
+				
+				myWriter.write(libri[i] + "\n");
+				System.out.println("Libro " + (i + 1) + " = " + libri[i]);
+			}
+			
+		} catch (IOException e) {
+			
+			System.out.println("Error updating file: " + e.getMessage());
+		} finally {
+			
+			try {
+				myWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
 		
 		
 	}
